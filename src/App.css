@@ -1,0 +1,23 @@
+.inputLine {
+  padding: 0 !important;
+  background-color: transparent;
+  border: none;
+  height: 1em;
+  margin-left: 0.5em;
+  color: #ebdbb2;
+  font-size: large;
+  caret-color: #ebdbb2;
+}
+
+.inputLine:focus {
+  outline: none;
+}
+
+p {
+  margin: 0.5em 0 0 0;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: fit-content(100%) auto;
+}

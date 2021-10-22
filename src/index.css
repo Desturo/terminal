@@ -2,8 +2,13 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 1em 0 1em;
 
   font-family: "Roboto Mono", monospace;
   font-size: large;
+
+  background-color: #282828;
+  color: #ebdbb2;
+
+  word-spacing: 0px;
 }
