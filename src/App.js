@@ -2,8 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import ContentEditable from "react-contenteditable";
 import crypto from "crypto";
+import { commandArray } from "./logic/statics/commands";
 
 function App() {
+  const NONEXIST = "nonexist";
+
   const [lines, setLines] = useState([]);
 
   const currentText = useRef("");
@@ -13,6 +16,24 @@ function App() {
     "Desturo",
     "website",
   ]);
+
+  const checkInput = (inputArray) => {
+    if (commandArray.indexOf(inputArray[0]) !== -1) {
+      let command = commandArray[commandArray.indexOf(inputArray[0])];
+      setLines([
+        ...lines,
+        { path: "nonexist", text: "Command: " + command + " recognized" },
+      ]);
+    } else {
+      setLines([
+        ...lines,
+        {
+          path: "nonexist",
+          text: "Command: " + inputArray[0] + " not recognized",
+        },
+      ]);
+    }
+  };
 
   const checkForEnter = (e) => {
     if (e.key === "Enter") {
@@ -26,21 +47,28 @@ function App() {
         }
       });
       newPath += ">";
-      setLines([...lines, { path: newPath, text: currentText }]);
+      let newText = currentText.current.replace(new RegExp("&nbsp;", "g"), " ");
+      checkInput(newText.split(" "));
+      setLines([...lines, { path: newPath, text: newText }]);
+      currentText.current = "";
     }
   };
 
   return (
     <div>
       <p>Welcome to the Terminal</p>
-      {lines.map((line) => (
-        <div className="line" key={crypto.randomBytes(16).toString("hex")}>
-          <span>{line.path}</span>
-          <span className="inputLine" autoComplete="off">
-            {line.text}
-          </span>
-        </div>
-      ))}
+      {lines.map((line) =>
+        line.path !== "nonexist" ? (
+          <div className="line" key={crypto.randomBytes(16).toString("hex")}>
+            <span>{line.path}</span>
+            <span className="inputLine" autoComplete="off">
+              {line.text}
+            </span>
+          </div>
+        ) : (
+          <span key={crypto.randomBytes(16).toString("hex")}>Log here</span>
+        )
+      )}
 
       <div className="line">
         <span>
@@ -51,12 +79,10 @@ function App() {
         </span>
         <ContentEditable
           className="inputLine"
-          html={""}
+          html={currentText.current}
           onKeyDown={checkForEnter}
-          onChange={async (e) => {
-            if (e.target.innerText !== undefined) {
-              currentText.current(e.target.value);
-            }
+          onChange={(e) => {
+            currentText.current = e.target.value;
           }}
         />
       </div>
