@@ -3,6 +3,7 @@ import "./App.css";
 import ContentEditable from "react-contenteditable";
 import crypto from "crypto";
 import { commandArray } from "./logic/statics/commands";
+import { createOutput } from "./logic/commandResponse";
 
 function App() {
 
@@ -22,8 +23,8 @@ function App() {
 
   const checkInput = (inputArray) => {
     if (commandArray.indexOf(inputArray[0]) !== -1) {
-      let command = commandArray[commandArray.indexOf(inputArray[0])];
-      return { path: "nonexist", text: "Command: \"" + command + "\" recognized" };
+      const command = commandArray[commandArray.indexOf(inputArray[0])];
+      return createOutput(command);
     } else {
       return { path: "nonexist", text: "Command: \"" + inputArray[0] + "\" not recognized" }
     }
