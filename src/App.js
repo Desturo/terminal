@@ -5,11 +5,14 @@ import crypto from "crypto";
 import { commandArray } from "./logic/statics/commands";
 
 function App() {
-  const NONEXIST = "nonexist";
 
   const [lines, setLines] = useState([]);
 
   const currentText = useRef("");
+
+  useEffect(() => {
+    console.log(lines);
+  }, [lines])
 
   const [curretDirectory, setCurretDirectory] = useState([
     "A",
@@ -20,22 +23,13 @@ function App() {
   const checkInput = (inputArray) => {
     if (commandArray.indexOf(inputArray[0]) !== -1) {
       let command = commandArray[commandArray.indexOf(inputArray[0])];
-      setLines([
-        ...lines,
-        { path: "nonexist", text: "Command: " + command + " recognized" },
-      ]);
+      return { path: "nonexist", text: "Command: " + command + " recognized" };
     } else {
-      setLines([
-        ...lines,
-        {
-          path: "nonexist",
-          text: "Command: " + inputArray[0] + " not recognized",
-        },
-      ]);
+      return { path: "nonexist", text: "Command: " + inputArray[0] + " not recognized" }
     }
   };
 
-  const checkForEnter = (e) => {
+  const checkForEnter = async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       let newPath = "";
@@ -48,9 +42,10 @@ function App() {
       });
       newPath += ">";
       let newText = currentText.current.replace(new RegExp("&nbsp;", "g"), " ");
-      checkInput(newText.split(" "));
-      setLines([...lines, { path: newPath, text: newText }]);
+      newText = newText.replace(/\s\s+/g, ' ');
+      setLines([...lines, { path: newPath, text: newText }, checkInput(newText.split(" "))]);
       currentText.current = "";
+        
     }
   };
 
@@ -66,7 +61,11 @@ function App() {
             </span>
           </div>
         ) : (
-          <span key={crypto.randomBytes(16).toString("hex")}>Log here</span>
+          <div className="line" key={crypto.randomBytes(16).toString("hex")}>
+            <span className="inputLine" autoComplete="off">
+              {line.text}
+            </span>
+        </div>
         )
       )}
 
