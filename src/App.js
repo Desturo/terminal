@@ -23,9 +23,9 @@ function App() {
   const checkInput = (inputArray) => {
     if (commandArray.indexOf(inputArray[0]) !== -1) {
       let command = commandArray[commandArray.indexOf(inputArray[0])];
-      return { path: "nonexist", text: "Command: " + command + " recognized" };
+      return { path: "nonexist", text: "Command: \"" + command + "\" recognized" };
     } else {
-      return { path: "nonexist", text: "Command: " + inputArray[0] + " not recognized" }
+      return { path: "nonexist", text: "Command: \"" + inputArray[0] + "\" not recognized" }
     }
   };
 
@@ -61,7 +61,7 @@ function App() {
             </span>
           </div>
         ) : (
-          <div className="line" key={crypto.randomBytes(16).toString("hex")}>
+          <div className="outputLine" key={crypto.randomBytes(16).toString("hex")}>
             <span className="inputLine" autoComplete="off">
               {line.text}
             </span>

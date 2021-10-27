@@ -21,3 +21,7 @@ p {
   display: grid;
   grid-template-columns: fit-content(100%) auto;
 }
+
+.outputLine {
+  padding-left: 1em;
+}
