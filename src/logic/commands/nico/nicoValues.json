@@ -1,0 +1,13 @@
+{
+    "parameters": [
+        {
+            "parameter": "-v",
+            "text": "v20.26"
+        },
+        {
+            "parameter": "-li",
+            "text": "List of commands:\n- help\n- nico\n- cd"
+        }
+        ],
+    "standardText": "I'm Nico.\nNothing more it's me. The guy that made this site."
+}

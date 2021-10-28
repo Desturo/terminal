@@ -1,4 +1,13 @@
 {
-    "available": ["hello", "test", "why"],
-    "helpText": "This is a Portfolio Website styled like a console.\nTry out some thing you could do in a normal console.\nExplore it!"
+    "parameters": [
+        {
+            "parameter": "-v",
+            "text": "v1.0"
+        },
+        {
+            "parameter": "-li",
+            "text": "List of commands:\n- help\n- nico\n-cd"
+        }
+        ],
+    "standardText" : "This is a Portfolio Website styled like a console.\nTry out some thing you could do in a normal console.\nExplore it!"
 }
