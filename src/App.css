@@ -23,5 +23,11 @@ p {
 }
 
 .outputLine {
+  display: grid;
+  grid-template-columns: 1fr;
   padding-left: 1em;
+}
+
+.outputLine > span {
+  padding-bottom: 0.3em !important;
 }

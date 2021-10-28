@@ -61,9 +61,9 @@ function App() {
           </div>
         ) : (
           <div className="outputLine" key={crypto.randomBytes(16).toString("hex")}>
-            <span className="inputLine" autoComplete="off">
-              {line.text}
-            </span>
+            {line.text.split('\n').map(str => <span className="inputLine" key={crypto.randomBytes(16).toString("hex")} autoComplete="off">
+              {str}
+              </span>)}
         </div>
         )
       )}
