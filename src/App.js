@@ -3,17 +3,13 @@ import "./App.css";
 import ContentEditable from "react-contenteditable";
 import crypto from "crypto";
 import { commandArray } from "./logic/statics/commands";
-import { createOutput } from "./logic/commandResponse";
+import { createOutput } from "./logic/commands/commandResponse";
 
 function App() {
 
   const [lines, setLines] = useState([]);
 
   const currentText = useRef("");
-
-  useEffect(() => {
-    console.log(lines);
-  }, [lines])
 
   const [curretDirectory, setCurretDirectory] = useState([
     "A",
@@ -22,9 +18,12 @@ function App() {
   ]);
 
   const checkInput = (inputArray) => {
+    while (inputArray.indexOf('') !== -1) {
+      inputArray.splice(inputArray.indexOf(''), 1);
+    }
     if (commandArray.indexOf(inputArray[0]) !== -1) {
       const command = commandArray[commandArray.indexOf(inputArray[0])];
-      return createOutput(command);
+      return createOutput(command, inputArray);
     } else {
       return { path: "nonexist", text: "Command: \"" + inputArray[0] + "\" not recognized" }
     }
@@ -43,7 +42,6 @@ function App() {
       });
       newPath += ">";
       let newText = currentText.current.replace(new RegExp("&nbsp;", "g"), " ");
-      newText = newText.replace(/\s\s+/g, ' ');
       setLines([...lines, { path: newPath, text: newText }, checkInput(newText.split(" "))]);
       currentText.current = "";
         

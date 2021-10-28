@@ -1,8 +1,10 @@
-export const createOutput = (command) => {
-    const commandOutput = {};
+import { helpCommand } from "./help/helpResponse";
+
+export const createOutput = (command, inputArray) => {
+    let commandOutput = {};
     switch (command) {
         case 'help':
-            commandOutput = { path: "nonexist", text: "Command: \"" + command + "\" recognized" };
+            commandOutput = helpCommand(inputArray);
         break;
         default:
             commandOutput = { path: "nonexist", text: "There was a Problem trying to determine the command." };
@@ -10,4 +12,4 @@ export const createOutput = (command) => {
     }
     return commandOutput;
 }
-    
+
