@@ -14,11 +14,14 @@ export const nicoCommand = (inputArray) => {
 
         const currentDate = new Date();
         let year = '';
-        const formattedDate = moment(currentDate).format('YYY-MM-DD')
-        formattedDate < new Date(`${currentYear}-02-03`) ? year = currentYear : currentYear = currentYear + 1;
-        const nextByrthday = new Date(`${year}-02-03`)
+        currentDate  < new Date(`${currentYear}-02-03`) ? year = currentYear : year = currentYear + 1;
+        const birthdayString = `${year}-02-03`
+        const nextByrthday = new Date(birthdayString)
+        const differenceInMs = nextByrthday.getTime() - currentDate.getTime();
+        const differenceInDays = Math.round(differenceInMs / (1000 * 3600 * 24));
+        const differenceInPerc = Math.round(((365 - differenceInDays) / 365) * 100);
 
-        return { path: "nonexist", text: nextByrthday.toString() };
+        return { path: "nonexist", text: `v${age}.${differenceInPerc}` };
     }else {
         return { path: "nonexist", text: obj.text };
     }
