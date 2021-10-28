@@ -1,3 +1,4 @@
 {
-    "available": ["hello", "test", "why"]
+    "available": ["hello", "test", "why"],
+    "helpText": "This is a Portfolio Website styled like a console.{'\n'}Try out some thing you could do in a normal console.{'\n'}Explore it!"
 }
