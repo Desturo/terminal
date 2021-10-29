@@ -16,8 +16,8 @@ export const nicoCommand = (inputArray) => {
         let year = '';
         currentDate  < new Date(`${currentYear}-02-03`) ? year = currentYear : year = currentYear + 1;
         const birthdayString = `${year}-02-03`
-        const nextByrthday = new Date(birthdayString)
-        const differenceInMs = nextByrthday.getTime() - currentDate.getTime();
+        const nextBirthday = new Date(birthdayString)
+        const differenceInMs = nextBirthday.getTime() - currentDate.getTime();
         const differenceInDays = Math.round(differenceInMs / (1000 * 3600 * 24));
         const differenceInPerc = Math.round(((365 - differenceInDays) / 365) * 100);
 

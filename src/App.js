@@ -23,7 +23,7 @@ function App() {
     }
     if (commandArray.indexOf(inputArray[0]) !== -1) {
       const command = commandArray[commandArray.indexOf(inputArray[0])];
-      return createOutput(command, inputArray);
+      return createOutput(command, inputArray, setCurretDirectory, curretDirectory);
     } else {
       return { path: "nonexist", text: "Command: \"" + inputArray[0] + "\" not recognized" }
     }
@@ -51,7 +51,7 @@ function App() {
     <div>
       <p>Welcome to the Terminal</p>
       {lines.map((line) =>
-        line.path !== "nonexist" ? (
+        line.text !== 'nonexist' && (line.path !== "nonexist" ? (
           <div className="line" key={crypto.randomBytes(16).toString("hex")}>
             <span>{line.path}</span>
             <span className="inputLine" autoComplete="off">
@@ -64,7 +64,8 @@ function App() {
               {str}
               </span>)}
         </div>
-        )
+        ))
+        
       )}
 
       <div className="line">
@@ -81,7 +82,7 @@ function App() {
           onChange={(e) => {
             currentText.current = e.target.value;
           }}
-        />
+        /> 
       </div>
     </div>
   );
